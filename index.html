@@ -1,0 +1,1497 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DEV PRAJAPATI | Web Developer & System Analyst</title>
+    <meta name="description"
+        content="Dev Prajapati — Web Developer & System Analyst from Ahmedabad. Building high-performance digital solutions, Python automation & security systems." />
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Cinzel:wght@500;700;900&family=Oswald:wght@500;700&family=Playfair+Display:ital,wght@0,700;1,700&family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandRed: '#e8100e',
+                        brandDark: '#080808',
+                        brandGray: '#111111',
+                        brandLight: '#f8f8f8',
+                    },
+                    fontFamily: {
+                        sans: ['Space Grotesk', 'sans-serif'],
+                        display: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* ── Typography ── */
+        .heading-bold-condensed {
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+            letter-spacing: -0.05em;
+            text-transform: uppercase;
+            line-height: 0.88;
+        }
+
+        /* ── Noise texture overlay ── */
+        .noise-overlay::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+
+        /* ── Checkerboard Pattern ── */
+        .checkerboard {
+            background-image:
+                linear-gradient(45deg, #000 25%, transparent 25%),
+                linear-gradient(-45deg, #000 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #000 75%),
+                linear-gradient(-45deg, transparent 75%, #000 75%);
+            background-size: 16px 16px;
+            background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
+        }
+
+        /* ── View Project Link ── */
+        .view-project-link {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding-bottom: 4px;
+            border-bottom: 2px solid currentColor;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .view-project-link .arrow {
+            transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .view-project-link:hover .arrow {
+            transform: translateX(6px);
+        }
+
+        /* ── Sticky Footer ── */
+        .sticky-footer-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+        }
+
+        /* ── Marquee Animation ── */
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .animate-marquee {
+            display: inline-block;
+            animation: marquee 28s linear infinite;
+        }
+
+        /* ── Fade In Up Animation ── */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .delay-1 {
+            animation-delay: 0.1s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.3s;
+        }
+
+        .delay-4 {
+            animation-delay: 0.4s;
+        }
+
+        .delay-5 {
+            animation-delay: 0.5s;
+        }
+
+        /* ── Scroll Reveal ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.7s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ── Project Card Hover ── */
+        .project-card {
+            transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .project-card .project-img {
+            transition: transform 0.7s cubic-bezier(0.25, 0.8, 0.25, 1), filter 0.7s ease;
+        }
+
+        .project-card:hover .project-img {
+            transform: scale(1.06);
+        }
+
+        .project-card .project-overlay {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+
+        /* ── Skill Card Hover ── */
+        .skill-card {
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #e8100e;
+            transform: scaleY(0);
+            transform-origin: bottom;
+            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            z-index: -1;
+        }
+
+        .skill-card:hover,
+        .skill-card:active {
+            transform: translateY(-6px);
+            border-color: #e8100e;
+            box-shadow: 0 16px 40px rgba(232, 16, 14, 0.2);
+        }
+
+        .skill-card:hover::before,
+        .skill-card:active::before {
+            transform: scaleY(1);
+        }
+
+        .skill-card .skill-icon {
+            transition: all 0.4s ease;
+        }
+
+        .skill-card:hover .skill-icon,
+        .skill-card:active .skill-icon {
+            color: white;
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        .skill-title {
+            transition: all 0.3s ease;
+        }
+
+        .skill-desc {
+            transition: all 0.3s ease;
+        }
+
+        .skill-card:hover .skill-title,
+        .skill-card:active .skill-title {
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .skill-card:hover .skill-desc,
+        .skill-card:active .skill-desc {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* ── Certification Card ── */
+        .cert-card {
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .cert-card:hover,
+        .cert-card:active {
+            background-color: #e8100e;
+            color: white;
+            transform: translateY(-6px);
+            box-shadow: 0 24px 48px rgba(232, 16, 14, 0.2);
+        }
+
+        .cert-card:hover .cert-provider,
+        .cert-card:active .cert-provider {
+            color: rgba(255, 255, 255, 0.7) !important;
+        }
+
+        .cert-card:hover .cert-icon,
+        .cert-card:active .cert-icon {
+            color: white !important;
+            border-color: rgba(255, 255, 255, 0.3) !important;
+        }
+
+        /* ── Nav Link Hover ── */
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #e8100e;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* ── Smooth Scroll ── */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* ── Custom Scrollbar ── */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #080808;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #e8100e;
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #c40c0c;
+        }
+
+        /* ── Tool Badge ── */
+        .tool-badge {
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .tool-badge:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* ── Stat counter ── */
+        .stat-item {
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+        }
+
+        .stat-item:hover,
+        .stat-item:active {
+            transform: scale(1.1);
+        }
+
+        .stat-item:hover .stat-num,
+        .stat-item:active .stat-num {
+            color: #e8100e;
+        }
+
+        /* ── Social icon ── */
+        .social-icon {
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .social-icon:hover {
+            background-color: #e8100e;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(232, 16, 14, 0.3);
+        }
+
+        body {
+            padding-bottom: 56px;
+        }
+
+        /* ── Divider line ── */
+        .red-line {
+            width: 48px;
+            height: 3px;
+            background: #e8100e;
+        }
+
+        /* ── Split Scale Hover Effect ── */
+        .logo-split {
+            display: inline-flex;
+            color: #e8100e;
+            cursor: pointer;
+            user-select: none;
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo-split span {
+            display: inline-block;
+            transition: transform 0.25s cubic-bezier(.34, 1.56, .64, 1),
+                color 0.25s;
+        }
+
+        .logo-split:hover span {
+            color: #ff5533;
+        }
+
+        .logo-split:hover span:nth-child(1) {
+            transform: translateX(-8px) scale(1.15);
+        }
+
+        .logo-split:hover span:nth-child(2) {
+            transform: translateY(-10px) scale(1.2);
+        }
+
+        .logo-split:hover span:nth-child(3) {
+            transform: translateX(8px) scale(1.15);
+        }
+
+        .logo-split span:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .logo-split span:nth-child(2) {
+            animation-delay: 0.18s;
+        }
+
+        .logo-split span:nth-child(3) {
+            animation-delay: 0.26s;
+        }
+
+        .logo-split span {
+            opacity: 0;
+            transform: translateY(100%);
+            animation: letterReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes letterReveal {
+            0% {
+                opacity: 0;
+                transform: translateY(100%);
+            }
+
+            60% {
+                opacity: 1;
+                transform: translateY(-5%);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Logo underline scanline */
+        .logo-underline {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 4px;
+            background: #e8100e;
+            width: 0;
+            animation: underlineSlide 0.5s cubic-bezier(0.25, 0.8, 0.25, 1) 0.7s forwards;
+            box-shadow: 0 0 10px #e8100e, 0 0 20px #e8100e;
+        }
+
+        .logo-wrapper:hover .logo-underline {
+            animation: scanlinePulse 1s ease-in-out infinite;
+            background: #fff;
+            box-shadow: 0 0 10px #fff, 0 0 20px #0ff, 0 0 30px #f0f;
+        }
+
+        @keyframes scanlinePulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+        }
+
+        @keyframes underlineSlide {
+            to {
+                width: 100%;
+            }
+        }
+
+        /* ── Section Typography Classes ── */
+        .font-playfair {
+            font-family: 'Playfair Display', serif !important;
+            letter-spacing: 0.02em !important;
+        }
+
+        .font-bebas {
+            font-family: 'Bebas Neue', display !important;
+            letter-spacing: 0.05em !important;
+            font-weight: normal !important;
+        }
+
+        .font-anton {
+            font-family: 'Anton', sans-serif !important;
+            letter-spacing: 0.03em !important;
+            font-weight: normal !important;
+        }
+
+        .font-oswald {
+            font-family: 'Oswald', sans-serif !important;
+            letter-spacing: 0.02em !important;
+            font-weight: 700 !important;
+        }
+
+        .font-cinzel {
+            font-family: 'Cinzel', serif !important;
+            letter-spacing: 0.05em !important;
+            font-weight: 900 !important;
+        }
+
+        /* Title Hover Effect */
+        .section-title {
+            display: inline-block;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: default;
+        }
+
+        .section-title:hover,
+        .section-title:active {
+            color: #e8100e;
+            transform: scale(1.03) translateX(8px);
+            text-shadow: 4px 4px 0px rgba(0, 0, 0, 0.06);
+        }
+
+        .logo-tm {
+            opacity: 0;
+            animation: tmFade 0.4s ease 0.9s forwards;
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes tmFade {
+            to {
+                opacity: 0.5;
+            }
+        }
+
+        /* ── Custom Cursor ── */
+        .cursor-dot {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 8px;
+            height: 8px;
+            background: #e8100e;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s ease, height 0.3s ease, background 0.3s ease;
+        }
+
+        .cursor-ring {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 36px;
+            height: 36px;
+            border: 2px solid rgba(232, 16, 14, 0.4);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: width 0.25s ease, height 0.25s ease, border-color 0.3s ease, background 0.3s ease;
+        }
+
+        .cursor-hover .cursor-dot {
+            width: 0;
+            height: 0;
+        }
+
+        .cursor-hover .cursor-ring {
+            width: 56px;
+            height: 56px;
+            border-color: #e8100e;
+            background: rgba(232, 16, 14, 0.08);
+        }
+
+        @media (max-width: 768px) {
+
+            .cursor-dot,
+            .cursor-ring {
+                display: none;
+            }
+        }
+
+        /* ── About Section ── */
+        .about-timeline-item {
+            position: relative;
+            padding-left: 28px;
+        }
+
+        .about-timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 10px;
+            height: 10px;
+            border: 2px solid #e8100e;
+            border-radius: 50%;
+            background: white;
+        }
+
+        .about-timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 4px;
+            top: 22px;
+            width: 2px;
+            height: calc(100% - 10px);
+            background: #e8100e20;
+        }
+
+        .about-timeline-item:last-child::after {
+            display: none;
+        }
+
+        /* ── Contact Form ── */
+        .form-input {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 0.75rem;
+            padding: 0.875rem 1.25rem;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+            width: 100%;
+            outline: none;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .form-input::placeholder {
+            color: rgba(255, 255, 255, 0.25);
+        }
+
+        .form-input:focus {
+            border-color: #e8100e;
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 0 3px rgba(232, 16, 14, 0.1);
+        }
+
+        .submit-btn {
+            background: #e8100e;
+            color: white;
+            border: none;
+            border-radius: 0.75rem;
+            padding: 0.875rem 2.5rem;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            font-family: 'Space Grotesk', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn:hover {
+            background: white;
+            color: #080808;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(232, 16, 14, 0.25);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* ── Project Modal ── */
+        .project-modal-backdrop {
+            position: fixed;
+            inset: 0;
+            z-index: 9990;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .project-modal-backdrop.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .project-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 9991;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            pointer-events: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .project-modal.active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        .project-modal-content {
+            background: #111;
+            border: 1px solid rgba(232, 16, 14, 0.15);
+            border-radius: 1.25rem;
+            max-width: 860px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: translateY(30px) scale(0.95);
+            transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+            scrollbar-width: thin;
+            scrollbar-color: #e8100e #111;
+        }
+
+        .project-modal.active .project-modal-content {
+            transform: translateY(0) scale(1);
+        }
+
+        .project-modal-content::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .project-modal-content::-webkit-scrollbar-thumb {
+            background: #e8100e;
+            border-radius: 10px;
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .modal-close-btn:hover {
+            background: #e8100e;
+            transform: rotate(90deg);
+        }
+    </style>
+</head>
+
+<body class="bg-white text-black font-sans antialiased overflow-x-hidden" ontouchstart="">
+
+    <!-- ═══════════════════ CURSOR FOLLOWER ═══════════════════ -->
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <!-- ═══════════════════ HEADER ═══════════════════ -->
+    <header id="top" class="w-full border-b border-gray-100 px-4 py-5 md:px-8">
+        <div class="flex flex-col items-center">
+            <h1 class="heading-bold-condensed text-brandRed text-[14vw] md:text-[9rem] leading-none mb-5 select-none"
+                id="logoTitle">
+                <span class="logo-split" id="logoWrapper">
+                    <span>D</span>
+                    <span>E</span>
+                    <span>V</span>
+                </span><sup class="logo-tm text-[3vw] md:text-2xl align-top ml-1">TM</sup>
+            </h1>
+            <nav
+                class="w-full max-w-4xl flex justify-between items-center text-sm md:text-base font-bold uppercase tracking-[0.2em] text-brandRed fade-in-up delay-2">
+                <a class="nav-link" href="#work">Work</a>
+                <a class="nav-link" href="#about">About</a>
+                <a class="nav-link" href="#skills">Skills</a>
+                <a class="nav-link" href="#certifications">Certs</a>
+                <a class="nav-link" href="#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- ═══════════════════ HERO ═══════════════════ -->
+        <section id="hero" class="grid grid-cols-1 md:grid-cols-2 min-h-[620px] border-b border-brandRed">
+            <!-- Left Content -->
+            <div
+                class="bg-brandRed text-white p-8 md:p-16 flex flex-col justify-between relative overflow-hidden noise-overlay">
+                <div
+                    class="absolute top-0 right-0 w-80 h-80 bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3">
+                </div>
+                <div
+                    class="absolute bottom-0 left-0 w-56 h-56 bg-black/10 rounded-full blur-3xl translate-y-1/3 -translate-x-1/3">
+                </div>
+
+                <div class="relative z-10">
+                    <div class="red-line bg-white/40 mb-8 fade-in-up delay-1"></div>
+                    <h2 class="heading-bold-condensed text-5xl md:text-[5.5rem] mb-6 fade-in-up delay-1">
+                        WEB DEV.<br />SYSTEM ANALYST.
+                    </h2>
+                    <div
+                        class="flex flex-wrap gap-2 text-[10px] md:text-xs font-bold mb-8 opacity-90 tracking-tight fade-in-up delay-2">
+                        <span class="border border-white/30 px-3 py-1 rounded-full">WEB DEVELOPMENT</span>
+                        <span class="border border-white/30 px-3 py-1 rounded-full">PYTHON & AUTOMATION</span>
+                        <span class="border border-white/30 px-3 py-1 rounded-full">SECURITY SYSTEMS</span>
+                    </div>
+                    <p class="max-w-md text-sm md:text-base leading-relaxed mb-10 opacity-90 fade-in-up delay-3">
+                        Building high-performance digital solutions. Exploring Python, automation
+                        & security systems from Ahmedabad. Crafting experiences that bridge
+                        functionality and modern aesthetics.
+                    </p>
+                </div>
+                <div class="relative z-10 fade-in-up delay-4">
+                    <a class="view-project-link text-lg md:text-xl font-bold uppercase" href="#work">
+                        View Projects <span class="arrow">&rarr;</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right Image -->
+            <div class="relative bg-brandDark overflow-hidden min-h-[400px] md:min-h-0">
+                <img src="images/dev.png" alt="Dev Prajapati" class="w-full h-full object-cover object-top" />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent"></div>
+                <div class="absolute bottom-8 left-8 right-8">
+                    <p class="heading-bold-condensed text-white text-3xl md:text-4xl tracking-tight">DEV PRAJAPATI</p>
+                    <div class="flex items-center gap-3 mt-2">
+                        <div class="w-6 h-[2px] bg-brandRed"></div>
+                        <p class="text-white/50 text-xs uppercase tracking-[0.25em] font-bold">Ahmedabad, India</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════ MARQUEE ═══════════════════ -->
+        <div class="bg-white border-b border-brandRed py-3 overflow-hidden whitespace-nowrap">
+            <div
+                class="animate-marquee uppercase text-[10px] md:text-xs font-bold text-brandRed/70 px-4 tracking-wider">
+                WEB DEVELOPER &mdash; SYSTEM ANALYST &mdash; PYTHON AUTOMATION &mdash; SECURITY SYSTEMS
+                &mdash; NEXT.JS &mdash; WORDPRESS &mdash; WEB DEVELOPER &mdash; SYSTEM ANALYST
+                &mdash; PYTHON AUTOMATION &mdash; SECURITY SYSTEMS &mdash; NEXT.JS &mdash; WORDPRESS&nbsp;
+            </div>
+        </div>
+
+        <!-- ═══════════════════ ABOUT ═══════════════════ -->
+        <section id="about" class="py-16 md:py-24 px-4 border-b border-gray-100">
+            <div class="container mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16">
+                    <!-- Left: Heading -->
+                    <div class="md:col-span-5">
+                        <div class="red-line mb-4 reveal"></div>
+                        <h2
+                            class="section-title heading-bold-condensed font-playfair text-brandDark text-4xl md:text-6xl mb-6 reveal">
+                            ABOUT<br />ME
+                        </h2>
+                        <p class="text-gray-400 text-sm leading-relaxed max-w-sm reveal">
+                            I'm Dev Prajapati, a web developer & system analyst crafting experiences that bridge
+                            functionality and modern aesthetics.
+                        </p>
+                    </div>
+
+                    <!-- Right: Story + Timeline -->
+                    <div class="md:col-span-7">
+                        <p class="text-base md:text-lg text-gray-700 leading-relaxed mb-8 reveal">
+                            Based in Ahmedabad, I specialize in crafting digital experiences that bridge functionality
+                            and aesthetics. Currently mastering Python and system analysis to build more robust,
+                            scalable infrastructures.
+                        </p>
+                        <p class="text-sm text-gray-500 leading-relaxed mb-10 reveal">
+                            My portfolio spans from high-converting commercial platforms to mission-critical security
+                            systems. I believe in code that is as beautiful as the interface it powers.
+                        </p>
+
+                        <!-- Timeline -->
+                        <div class="space-y-6">
+                            <div class="about-timeline-item reveal">
+                                <p class="text-[10px] uppercase font-bold tracking-widest text-brandRed mb-1">Present
+                                </p>
+                                <p class="font-bold text-brandDark text-sm">Web Developer & System Analyst</p>
+                                <p class="text-xs text-gray-400">Building commercial platforms & security systems
+                                </p>
+                            </div>
+                            <div class="about-timeline-item reveal">
+                                <p class="text-[10px] uppercase font-bold tracking-widest text-brandRed mb-1">Education
+                                </p>
+                                <p class="font-bold text-brandDark text-sm">Bachelor of Computer Applications</p>
+                                <p class="text-xs text-gray-400">Data Structures, Algorithms, Software Engineering</p>
+                            </div>
+                            <div class="about-timeline-item reveal">
+                                <p class="text-[10px] uppercase font-bold tracking-widest text-brandRed mb-1">Certified
+                                </p>
+                                <p class="font-bold text-brandDark text-sm">Accenture Data Analytics · Forage</p>
+                                <p class="text-xs text-gray-400">Data Analytics, Visualization & Storytelling
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════ PROJECTS ═══════════════════ -->
+        <section id="work" class="px-4 md:px-8 lg:px-12 py-16 md:py-24">
+            <div class="flex items-end justify-between mb-14">
+                <div>
+                    <div class="red-line mb-4 reveal"></div>
+                    <h2
+                        class="section-title heading-bold-condensed font-bebas text-brandDark text-4xl md:text-6xl reveal">
+                        FEATURED<br />PROJECTS
+                    </h2>
+                </div>
+                <p class="hidden md:block text-xs uppercase tracking-widest text-gray-400 font-bold reveal">02 Selected
+                    Works</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16">
+                <!-- Project 1: Dev Mobile Website -->
+                <article class="flex flex-col project-card reveal" onclick="openProjectModal('devmobile')"
+                    style="cursor:pointer">
+                    <div class="aspect-[4/3] bg-gray-100 mb-4 sm:mb-6 overflow-hidden rounded-lg relative group">
+                        <div
+                            class="absolute inset-0 w-[200%] h-[200%] origin-top-left scale-[0.5] transition-transform duration-700 ease-[cubic-bezier(0.25,0.8,0.25,1)] group-hover:scale-[0.53]">
+                            <iframe src="https://devmobile.shop" class="w-full h-full border-none pointer-events-none"
+                                loading="lazy" scrolling="no" tabindex="-1"></iframe>
+                        </div>
+                        <div
+                            class="project-overlay absolute inset-0 bg-brandRed/80 flex items-center justify-center pointer-events-none transition-opacity duration-500 ease-in-out">
+                            <span
+                                class="text-white font-bold uppercase tracking-widest text-xs sm:text-sm border-2 border-white px-4 sm:px-6 py-2 sm:py-2.5 rounded-full">View
+                                Details</span>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <div>
+                            <h3 class="heading-bold-condensed text-brandDark text-xl sm:text-2xl md:text-3xl mb-2">DEV
+                                MOBILE
+                                WEBSITE
+                            </h3>
+                            <span
+                                class="bg-brandRed text-white text-[9px] px-3 py-0.5 rounded-full inline-block mb-2 font-bold tracking-wider">BUSINESS</span>
+                            <p class="text-[10px] uppercase font-bold text-brandRed tracking-widest">Next.js / Tailwind
+                                / SEO</p>
+                        </div>
+                        <div>
+                            <p class="text-xs mb-4 leading-relaxed text-gray-500">A professional business website for a
+                                mobile service center in Ahmedabad with dynamic service catalog and mobile-first design.
+                            </p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 2: EMI Secure System -->
+                <article class="flex flex-col project-card reveal" onclick="openProjectModal('emisecure')"
+                    style="cursor:pointer">
+                    <div class="aspect-[4/3] bg-gray-100 mb-4 sm:mb-6 overflow-hidden rounded-lg relative group">
+                        <div
+                            class="absolute inset-0 w-[200%] h-[200%] origin-top-left scale-[0.5] transition-transform duration-700 ease-[cubic-bezier(0.25,0.8,0.25,1)] group-hover:scale-[0.53]">
+                            <iframe src="https://emi-secure-system.vercel.app/"
+                                class="w-full h-full border-none pointer-events-none" loading="lazy" scrolling="no"
+                                tabindex="-1"></iframe>
+                        </div>
+                        <div
+                            class="project-overlay absolute inset-0 bg-brandRed/80 flex items-center justify-center pointer-events-none transition-opacity duration-500 ease-in-out">
+                            <span
+                                class="text-white font-bold uppercase tracking-widest text-xs sm:text-sm border-2 border-white px-4 sm:px-6 py-2 sm:py-2.5 rounded-full">View
+                                Details</span>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <div>
+                            <h3 class="heading-bold-condensed text-brandDark text-xl sm:text-2xl md:text-3xl mb-2">EMI
+                                SECURE
+                                SYSTEM
+                            </h3>
+                            <span
+                                class="bg-brandRed text-white text-[9px] px-3 py-0.5 rounded-full inline-block mb-2 font-bold tracking-wider">SECURITY</span>
+                            <p class="text-[10px] uppercase font-bold text-brandRed tracking-widest">React / Security /
+                                Tracking</p>
+                        </div>
+                        <div>
+                            <p class="text-xs mb-4 leading-relaxed text-gray-500">Advanced phone EMI tracking and
+                                security software for finance providers with automated payment tracking and device lock
+                                protocols.</p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- ═══════════════════ SKILLS ═══════════════════ -->
+        <section id="skills" class="bg-brandLight border-t border-gray-200 py-16 md:py-24">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-14">
+                    <div class="red-line mx-auto mb-4 reveal"></div>
+                    <h3
+                        class="section-title heading-bold-condensed font-anton text-brandDark text-4xl md:text-6xl reveal">
+                        TECHNICAL
+                        SKILLS</h3>
+                    <p class="text-xs uppercase tracking-widest text-gray-400 font-bold mt-4 reveal">What I work with
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 md:gap-6">
+                    <div class="skill-card bg-white border border-gray-200 rounded-xl p-7 text-center reveal">
+                        <div class="skill-icon w-12 h-12 mx-auto mb-5 flex items-center justify-center text-gray-400">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.5"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+                            </svg>
+                        </div>
+                        <p class="font-bold uppercase tracking-widest text-brandDark mb-3 text-xs skill-title">Frontend
+                        </p>
+                        <p class="text-sm text-gray-500 leading-relaxed skill-desc">HTML, CSS, JavaScript, WordPress,
+                            Next.js
+                        </p>
+                    </div>
+                    <div class="skill-card bg-white border border-gray-200 rounded-xl p-7 text-center reveal">
+                        <div class="skill-icon w-12 h-12 mx-auto mb-5 flex items-center justify-center text-gray-400">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.5"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M9.75 3.104v5.714a2.25 2.25 0 0 1-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 0 1 4.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0 1 12 15a9.065 9.065 0 0 0-6.23.693L5 14.5m14.8.8 1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0 1 12 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
+                            </svg>
+                        </div>
+                        <p class="font-bold uppercase tracking-widest text-brandDark mb-3 text-xs skill-title">Backend
+                        </p>
+                        <p class="text-sm text-gray-500 leading-relaxed skill-desc">Python, PL/SQL, Node.js (Basic)</p>
+                    </div>
+                    <div class="skill-card bg-white border border-gray-200 rounded-xl p-7 text-center reveal">
+                        <div class="skill-icon w-12 h-12 mx-auto mb-5 flex items-center justify-center text-gray-400">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.5"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125" />
+                            </svg>
+                        </div>
+                        <p class="font-bold uppercase tracking-widest text-brandDark mb-3 text-xs skill-title">Database
+                        </p>
+                        <p class="text-sm text-gray-500 leading-relaxed skill-desc">MySQL, Oracle SQL</p>
+                    </div>
+                    <div class="skill-card bg-white border border-gray-200 rounded-xl p-7 text-center reveal">
+                        <div class="skill-icon w-12 h-12 mx-auto mb-5 flex items-center justify-center text-gray-400">
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.5"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M21.75 17.25v-.228a4.5 4.5 0 0 0-.12-1.03l-2.268-9.64a3.375 3.375 0 0 0-3.285-2.602H7.923a3.375 3.375 0 0 0-3.285 2.602l-2.268 9.64a4.5 4.5 0 0 0-.12 1.03v.228m19.5 0a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3m19.5 0a3 3 0 0 0-3-3H5.25a3 3 0 0 0-3 3m16.5 0h.008v.008h-.008v-.008Zm-3 0h.008v.008h-.008v-.008Z" />
+                            </svg>
+                        </div>
+                        <p class="font-bold uppercase tracking-widest text-brandDark mb-3 text-xs skill-title">Tools</p>
+                        <p class="text-sm text-gray-500 leading-relaxed skill-desc">GitHub, Vercel, Selenium</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════ TOOLS BANNER ═══════════════════ -->
+        <section class="bg-brandDark text-white py-10 md:py-14 relative noise-overlay">
+            <h4 class="text-center font-bold uppercase text-[10px] md:text-xs mb-8 tracking-[0.35em] text-white/40">
+                Tools &amp; Technologies</h4>
+            <div class="flex flex-wrap justify-center items-center gap-4 md:gap-8 px-4 relative z-10">
+                <span
+                    class="tool-badge text-lg md:text-xl font-bold tracking-tight px-5 py-2 rounded-full">GITHUB</span>
+                <span
+                    class="tool-badge text-lg md:text-xl font-bold tracking-tight px-5 py-2 rounded-full">VERCEL</span>
+                <span
+                    class="tool-badge text-lg md:text-xl font-bold tracking-tight px-5 py-2 rounded-full">SELENIUM</span>
+                <span class="tool-badge text-lg md:text-xl font-bold tracking-tight px-5 py-2 rounded-full">VS
+                    CODE</span>
+                <span
+                    class="tool-badge text-lg md:text-xl font-bold tracking-tight px-5 py-2 rounded-full">NEXT.JS</span>
+                <span
+                    class="tool-badge text-lg md:text-xl font-bold tracking-tight px-5 py-2 rounded-full">WORDPRESS</span>
+            </div>
+        </section>
+
+        <!-- ═══════════════════ CERTIFICATIONS ═══════════════════ -->
+        <section id="certifications" class="py-16 md:py-24 px-4">
+            <div class="container mx-auto">
+                <div class="mb-14">
+                    <div class="red-line mb-4 reveal"></div>
+                    <h3
+                        class="section-title heading-bold-condensed font-oswald text-brandDark text-4xl md:text-6xl reveal">
+                        CERTIFICATIONS</h3>
+                    <p class="text-xs uppercase tracking-widest text-gray-400 font-bold mt-4 reveal">Verified
+                        credentials</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div
+                        class="cert-card border border-gray-200 p-8 flex flex-col justify-between rounded-xl reveal cursor-default min-h-[200px]">
+                        <div>
+                            <h4 class="font-bold text-lg mb-2 leading-tight">DATA ANALYTICS & VISUALIZATION</h4>
+                            <p class="cert-provider text-[10px] uppercase font-bold tracking-widest text-brandRed mb-3">
+                                Accenture North America · Forage</p>
+                            <p class="text-xs text-gray-500 leading-relaxed mb-4">Completed a job simulation involving
+                                data analytics and visualization for a social media client. Cleaned datasets, uncovered
+                                content trends, and prepared presentations for stakeholders.</p>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex flex-wrap gap-1">
+                                <span
+                                    class="text-[9px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-bold">Excel</span>
+                                <span
+                                    class="text-[9px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-bold">PowerPoint</span>
+                                <span
+                                    class="text-[9px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-bold">Data
+                                    Viz</span>
+                            </div>
+                            <a href="https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/9PBTqmSxAf6zZTseP/io9DzWKe3PTsiS6GG_9PBTqmSxAf6zZTseP_Lo5uHfbvvTpdeLN5a_1751994439112_completion_certificate.pdf"
+                                target="_blank" rel="noopener noreferrer"
+                                class="cert-icon w-10 h-10 rounded-lg border border-gray-200 flex items-center justify-center text-gray-400 self-end hover:text-brandRed hover:border-brandRed transition-colors">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div
+                        class="cert-card border border-gray-200 p-8 flex flex-col justify-between rounded-xl reveal cursor-default min-h-[200px]">
+                        <div>
+                            <h4 class="font-bold text-lg mb-2 leading-tight">WEB DEVELOPMENT FUNDAMENTALS</h4>
+                            <p class="cert-provider text-[10px] uppercase font-bold tracking-widest text-brandRed mb-3">
+                                Self-Paced / Online Certification</p>
+                            <p class="text-xs text-gray-500 leading-relaxed mb-4">Focused on responsive design
+                                principles and modern JavaScript frameworks.</p>
+                        </div>
+                        <div class="flex flex-wrap gap-1">
+                            <span
+                                class="text-[9px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-bold">HTML</span>
+                            <span
+                                class="text-[9px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-bold">CSS</span>
+                            <span
+                                class="text-[9px] px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 font-bold">JavaScript</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ═══════════════════ FOOTER + CONTACT ═══════════════════ -->
+    <footer id="contact" class="bg-brandDark text-white pt-20 pb-28 relative noise-overlay">
+        <div class="container mx-auto px-4 relative z-10">
+            <!-- Top section -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16 mb-16">
+                <!-- Left: Contact Info -->
+                <div class="md:col-span-5 reveal">
+                    <h2 class="section-title heading-bold-condensed font-cinzel text-4xl md:text-5xl leading-none mb-2">
+                        LET'S<br />CONNECT</h2>
+                    <div class="w-10 h-[2px] bg-brandRed mt-4 mb-6"></div>
+                    <p class="text-white/40 text-sm leading-relaxed max-w-sm mb-8">
+                        Open to collaborations, freelance opportunities, and interesting conversations about technology.
+                        Drop me a message and I'll get back to you.
+                    </p>
+                    <a class="font-bold text-lg hover:text-brandRed transition-colors duration-300 block mb-8"
+                        href="mailto:prajapatidev9974@gmail.com">prajapatidev9974@gmail.com</a>
+
+                    <!-- Social -->
+                    <p class="text-[10px] uppercase font-bold tracking-widest text-white/30 mb-4">Follow</p>
+                    <div class="flex gap-3 flex-wrap">
+                        <a href="https://github.com/Prajapatidev99" target="_blank" rel="noopener noreferrer"
+                            class="social-icon flex items-center gap-3 bg-white/5 rounded-lg px-4 py-3 group">
+                            <svg class="w-5 h-5 text-white/60 group-hover:text-white transition-colors"
+                                fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                            </svg>
+                            <span
+                                class="text-sm font-bold text-white/70 group-hover:text-white transition-colors">GitHub</span>
+                        </a>
+                        <a href="https://www.linkedin.com/in/dev-prajapati-4492b7370" target="_blank"
+                            rel="noopener noreferrer"
+                            class="social-icon flex items-center gap-3 bg-white/5 rounded-lg px-4 py-3 group">
+                            <svg class="w-5 h-5 text-white/60 group-hover:text-white transition-colors"
+                                fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                            </svg>
+                            <span
+                                class="text-sm font-bold text-white/70 group-hover:text-white transition-colors">LinkedIn</span>
+                        </a>
+                        <a href="https://wa.me/919974221322" target="_blank" rel="noopener noreferrer"
+                            class="social-icon flex items-center gap-3 bg-white/5 rounded-lg px-4 py-3 group">
+                            <svg class="w-5 h-5 text-white/60 group-hover:text-white transition-colors"
+                                fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                            </svg>
+                            <span
+                                class="text-sm font-bold text-white/70 group-hover:text-white transition-colors">WhatsApp</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right: Contact Form -->
+                <div class="md:col-span-7 reveal">
+                    <p class="text-[10px] uppercase font-bold tracking-widest text-white/30 mb-6">Send a Message</p>
+                    <form id="contactForm" action="https://api.web3forms.com/submit" method="POST" class="space-y-4">
+                        <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_KEY" />
+                        <input type="hidden" name="to" value="prajapatidev9974@gmail.com" />
+                        <input type="hidden" name="subject" value="New message from Portfolio" />
+                        <input type="hidden" name="redirect" value="" />
+                        <input type="checkbox" name="botcheck" class="hidden" style="display:none" />
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <input type="text" name="name" class="form-input" placeholder="Your Name" required />
+                            <input type="email" name="email" class="form-input" placeholder="Your Email" required />
+                        </div>
+                        <input type="text" name="subject_line" class="form-input" placeholder="Subject" />
+                        <textarea name="message" rows="5" class="form-input resize-none" placeholder="Your message..."
+                            required></textarea>
+                        <div class="flex items-center justify-between gap-4">
+                            <button type="submit" class="submit-btn" id="submitBtn">Send Message</button>
+                            <p id="formStatus" class="text-sm font-bold hidden"></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Quick Stats Row -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 py-10 border-t border-b border-white/10 mb-10">
+                <div class="stat-item cursor-default text-center">
+                    <p class="stat-num heading-bold-condensed text-white text-3xl transition-colors">2+</p>
+                    <p class="text-[10px] uppercase font-bold tracking-widest text-white/30 mt-1">Projects</p>
+                </div>
+                <div class="stat-item cursor-default text-center">
+                    <p class="stat-num heading-bold-condensed text-white text-3xl transition-colors">2</p>
+                    <p class="text-[10px] uppercase font-bold tracking-widest text-white/30 mt-1">Certifications</p>
+                </div>
+                <div class="stat-item cursor-default text-center">
+                    <p class="stat-num heading-bold-condensed text-white text-3xl transition-colors">2+</p>
+                    <p class="text-[10px] uppercase font-bold tracking-widest text-white/30 mt-1">Years Exp</p>
+                </div>
+                <div class="stat-item cursor-default text-center">
+                    <p class="stat-num heading-bold-condensed text-white text-3xl transition-colors">&infin;</p>
+                    <p class="text-[10px] uppercase font-bold tracking-widest text-white/30 mt-1">Lines of Code</p>
+                </div>
+            </div>
+
+            <!-- Bottom bar -->
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-[10px] font-bold uppercase tracking-widest text-white/20">
+                    &copy; 2026 Dev Prajapati. Built for speed and impact.
+                </p>
+                <a href="#top"
+                    class="text-[10px] font-bold uppercase tracking-widest text-white/30 hover:text-brandRed transition-colors">
+                    Back to Top &uarr;
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ═══════════════════ STICKY BOTTOM BAR ═══════════════════ -->
+    <div class="sticky-footer-bar">
+        <div class="checkerboard h-3 w-full"></div>
+        <div
+            class="bg-brandRed text-white py-2 px-4 flex justify-between items-center text-[9px] md:text-[10px] font-bold uppercase tracking-widest">
+            <div class="flex gap-4 items-center">
+                <span class="opacity-70">Dev Prajapati</span>
+                <a class="underline hover:opacity-70 transition-opacity hidden sm:inline" href="#work">Projects</a>
+                <a class="underline hover:opacity-70 transition-opacity hidden sm:inline" href="#skills">Skills</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <a class="underline hover:opacity-70 transition-opacity" href="#contact">Get in Touch</a>
+                <span class="cursor-pointer hover:opacity-50 transition-opacity text-sm"
+                    onclick="this.closest('.sticky-footer-bar').style.display='none'">&times;</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════ PROJECT MODAL ═══════════════════ -->
+    <div class="project-modal-backdrop" id="projectModalBackdrop" onclick="closeProjectModal()"></div>
+    <div class="project-modal" id="projectModal" onclick="closeProjectModal()">
+        <div class="project-modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close-btn" onclick="closeProjectModal()" aria-label="Close">&times;</button>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════ SCRIPTS ═══════════════════ -->
+    <script>
+        // ── Project Data ──
+        const projectData = {
+            devmobile: {
+                title: 'DEV MOBILE WEBSITE',
+                tag: 'BUSINESS',
+                tech: 'Next.js / Tailwind CSS / SEO',
+                image: 'images/devmobile.png',
+                description: 'A professional business website for a mobile service center in Ahmedabad with dynamic service catalog and mobile-first design.',
+                longDescription: 'This project involved creating a full-featured digital presence for a mobile sales and service hub. Built using Next.js for SEO and performance, the site features optimized page load times, structured data for local search visibility, and a clean UI designed for quick customer interactions.',
+                features: [
+                    'Dynamic service catalog with categories',
+                    'Real-time WhatsApp & call integration',
+                    'Mobile-first responsive design',
+                    'SEO optimized for local search',
+                    'Fast page load with Next.js SSR'
+                ],
+                liveLink: 'https://devmobile.shop',
+                githubLink: 'https://github.com/Prajapatidev99/DEV-MOBILE-SALES',
+                tags: ['Next.js', 'Tailwind CSS', 'SEO', 'Business', 'Responsive']
+            },
+            emisecure: {
+                title: 'EMI SECURE SYSTEM',
+                tag: 'SECURITY',
+                tech: 'React / Firebase / Node.js',
+                image: 'images/emi-secure.png',
+                description: 'Advanced phone EMI tracking and security software for finance providers. Features automated payment tracking, device lock protocols, and an admin dashboard for monitoring thousands of devices in real-time.',
+                longDescription: 'EMI Secure is a comprehensive security platform designed to help mobile finance providers manage EMI payments and protect their inventory. The system includes automated device locking for overdue payments, real-time monitoring dashboards, and a complete admin panel for managing customers and devices at scale.',
+                features: [
+                    'Automated device lock for overdue EMI',
+                    'Real-time admin monitoring dashboard',
+                    'Firebase push notifications',
+                    'Customer & payment management',
+                    'Role-based access control'
+                ],
+                liveLink: 'https://emi-secure-system.vercel.app/',
+                githubLink: 'https://github.com/Prajapatidev99/emi-secure-system',
+                tags: ['React', 'Firebase', 'Security', 'Node.js', 'Admin Panel']
+            }
+        };
+
+        function openProjectModal(projectId) {
+            const project = projectData[projectId];
+            if (!project) return;
+
+            const modalBody = document.getElementById('modalBody');
+            modalBody.innerHTML = `
+                <div class="relative">
+                    <img src="${project.image}" alt="${project.title}" 
+                        style="width:100%; height:auto; max-height:340px; object-fit:cover; border-radius:1.25rem 1.25rem 0 0; display:block;" />
+                    <div style="position:absolute; inset:0; background:linear-gradient(to top, #111 0%, transparent 60%); border-radius:1.25rem 1.25rem 0 0;"></div>
+                    <div style="position:absolute; bottom:20px; left:24px; right:24px;">
+                        <span style="background:#e8100e; color:white; font-size:9px; padding:3px 12px; border-radius:999px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase;">${project.tag}</span>
+                    </div>
+                </div>
+                <div style="padding:24px;">
+                    <h2 style="font-family:'Oswald',sans-serif; font-weight:900; font-size:clamp(1.5rem,5vw,2.5rem); color:white; margin-bottom:6px; letter-spacing:-0.02em; text-transform:uppercase;">${project.title}</h2>
+                    <p style="font-size:11px; text-transform:uppercase; font-weight:700; color:#e8100e; letter-spacing:0.15em; margin-bottom:20px;">${project.tech}</p>
+                    
+                    <p style="color:rgba(255,255,255,0.7); font-size:14px; line-height:1.7; margin-bottom:16px;">${project.description}</p>
+                    <p style="color:rgba(255,255,255,0.5); font-size:13px; line-height:1.7; margin-bottom:24px;">${project.longDescription}</p>
+                    
+                    <div style="margin-bottom:24px;">
+                        <p style="font-size:10px; text-transform:uppercase; font-weight:700; letter-spacing:0.2em; color:rgba(255,255,255,0.3); margin-bottom:12px;">Key Features</p>
+                        <ul style="list-style:none; padding:0; margin:0; display:grid; gap:8px;">
+                            ${project.features.map(f => `
+                                <li style="display:flex; align-items:center; gap:10px; color:rgba(255,255,255,0.65); font-size:13px;">
+                                    <span style="width:6px; height:6px; background:#e8100e; border-radius:50%; flex-shrink:0;"></span>
+                                    ${f}
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+
+                    <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:28px;">
+                        ${project.tags.map(t => `<span style="font-size:10px; padding:4px 12px; border-radius:999px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08); color:rgba(255,255,255,0.5); font-weight:600;">${t}</span>`).join('')}
+                    </div>
+
+                    <div style="display:flex; flex-wrap:wrap; gap:12px;">
+                        <a href="${project.liveLink}" target="_blank" rel="noopener noreferrer" 
+                            style="display:inline-flex; align-items:center; gap:8px; background:#e8100e; color:white; padding:12px 28px; border-radius:999px; font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:0.1em; text-decoration:none; transition:all 0.3s ease;"
+                            onmouseover="this.style.background='#c50d0b'" onmouseout="this.style.background='#e8100e'">
+                            Live Site
+                            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+                        </a>
+                        <a href="${project.githubLink}" target="_blank" rel="noopener noreferrer" 
+                            style="display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.12); color:white; padding:12px 28px; border-radius:999px; font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:0.1em; text-decoration:none; transition:all 0.3s ease;"
+                            onmouseover="this.style.borderColor='#e8100e'; this.style.color='#e8100e'" onmouseout="this.style.borderColor='rgba(255,255,255,0.12)'; this.style.color='white'">
+                            GitHub
+                            <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        </a>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('projectModalBackdrop').classList.add('active');
+            document.getElementById('projectModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeProjectModal() {
+            document.getElementById('projectModalBackdrop').classList.remove('active');
+            document.getElementById('projectModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeProjectModal();
+        });
+        // ── Scroll Reveal ──
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('active');
+                    }, index * 60);
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.08,
+            rootMargin: '0px 0px -30px 0px'
+        });
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            revealObserver.observe(el);
+        });
+
+        // ── Smooth Scroll ──
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // ── Custom Cursor Follower ──
+        const cursorDot = document.getElementById('cursorDot');
+        const cursorRing = document.getElementById('cursorRing');
+        let mouseX = 0, mouseY = 0;
+        let ringX = 0, ringY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            cursorDot.style.left = mouseX + 'px';
+            cursorDot.style.top = mouseY + 'px';
+        });
+
+        // Smooth ring follow
+        function animateRing() {
+            ringX += (mouseX - ringX) * 0.15;
+            ringY += (mouseY - ringY) * 0.15;
+            cursorRing.style.left = ringX + 'px';
+            cursorRing.style.top = ringY + 'px';
+            requestAnimationFrame(animateRing);
+        }
+        animateRing();
+
+        // Hover detection for interactive elements
+        const hoverTargets = document.querySelectorAll('a, button, .project-card, .skill-card, .cert-card, .tool-badge, .social-icon, .nav-link, .logo-wrapper, input, textarea');
+        hoverTargets.forEach(el => {
+            el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+            el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+        });
+
+        // ── Contact Form ──
+        const contactForm = document.getElementById('contactForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const formStatus = document.getElementById('formStatus');
+
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+            formStatus.classList.add('hidden');
+
+            try {
+                const formData = new FormData(contactForm);
+                const response = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await response.json();
+
+                if (data.success) {
+                    formStatus.textContent = 'Message sent successfully!';
+                    formStatus.className = 'text-sm font-bold text-green-400';
+                    contactForm.reset();
+                } else {
+                    formStatus.textContent = 'Something went wrong. Try emailing directly.';
+                    formStatus.className = 'text-sm font-bold text-red-400';
+                }
+            } catch (error) {
+                formStatus.textContent = 'Network error. Try emailing directly.';
+                formStatus.className = 'text-sm font-bold text-red-400';
+            }
+
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Send Message';
+            formStatus.classList.remove('hidden');
+
+            setTimeout(() => {
+                formStatus.classList.add('hidden');
+            }, 5000);
+        });
+    </script>
+</body>
+
+</html>
+```
