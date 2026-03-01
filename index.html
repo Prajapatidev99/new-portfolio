@@ -381,42 +381,29 @@
 
         .logo-split span {
             display: inline-block;
-            transition: transform 0.25s cubic-bezier(.34, 1.56, .64, 1),
+            opacity: 1;
+            transform: translateY(0);
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
                 color 0.25s;
         }
 
-        .logo-split:hover span {
-            color: #ff5533;
-        }
-
-        .logo-split:hover span:nth-child(1) {
-            transform: translateX(-8px) scale(1.15);
-        }
-
-        .logo-split:hover span:nth-child(2) {
-            transform: translateY(-10px) scale(1.2);
-        }
-
-        .logo-split:hover span:nth-child(3) {
-            transform: translateX(8px) scale(1.15);
-        }
-
-        .logo-split span:nth-child(1) {
-            animation-delay: 0.1s;
-        }
-
-        .logo-split span:nth-child(2) {
-            animation-delay: 0.18s;
-        }
-
-        .logo-split span:nth-child(3) {
-            animation-delay: 0.26s;
-        }
-
-        .logo-split span {
+        /* Entrance animation — only while .animating class is present */
+        .logo-split.animating span {
             opacity: 0;
             transform: translateY(100%);
             animation: letterReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .logo-split.animating span:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .logo-split.animating span:nth-child(2) {
+            animation-delay: 0.18s;
+        }
+
+        .logo-split.animating span:nth-child(3) {
+            animation-delay: 0.26s;
         }
 
         @keyframes letterReveal {
@@ -436,6 +423,19 @@
             }
         }
 
+        /* Split hover — only works after .animating is removed */
+        .logo-split:not(.animating):hover span:nth-child(1) {
+            transform: translateX(-22px) scale(1.12) rotateY(-10deg);
+        }
+
+        .logo-split:not(.animating):hover span:nth-child(2) {
+            transform: translateY(-28px) scale(1.18);
+        }
+
+        .logo-split:not(.animating):hover span:nth-child(3) {
+            transform: translateX(22px) scale(1.12) rotateY(10deg);
+        }
+
         /* Logo underline scanline */
         .logo-underline {
             position: absolute;
@@ -445,13 +445,11 @@
             background: #e8100e;
             width: 0;
             animation: underlineSlide 0.5s cubic-bezier(0.25, 0.8, 0.25, 1) 0.7s forwards;
-            box-shadow: 0 0 10px #e8100e, 0 0 20px #e8100e;
         }
 
         .logo-wrapper:hover .logo-underline {
             animation: scanlinePulse 1s ease-in-out infinite;
             background: #fff;
-            box-shadow: 0 0 10px #fff, 0 0 20px #0ff, 0 0 30px #f0f;
         }
 
         @keyframes scanlinePulse {
@@ -761,11 +759,11 @@
     <div class="cursor-ring" id="cursorRing"></div>
 
     <!-- ═══════════════════ HEADER ═══════════════════ -->
-    <header id="top" class="w-full border-b border-gray-100 px-4 py-5 md:px-8">
+    <header id="top" class="w-full px-4 pt-5 pb-0 md:px-8">
         <div class="flex flex-col items-center">
             <h1 class="heading-bold-condensed text-brandRed text-[14vw] md:text-[9rem] leading-none mb-5 select-none"
                 id="logoTitle">
-                <span class="logo-split" id="logoWrapper">
+                <span class="logo-split animating" id="logoWrapper">
                     <span>D</span>
                     <span>E</span>
                     <span>V</span>
@@ -798,7 +796,7 @@
                 <div class="relative z-10">
                     <div class="red-line bg-white/40 mb-8 fade-in-up delay-1"></div>
                     <h2 class="heading-bold-condensed text-5xl md:text-[5.5rem] mb-6 fade-in-up delay-1">
-                        WEB DEV.<br />SYSTEM ANALYST.
+                        WEB DEV &<br />SYSTEM ANALYST
                     </h2>
                     <div
                         class="flex flex-wrap gap-2 text-[10px] md:text-xs font-bold mb-8 opacity-90 tracking-tight fade-in-up delay-2">
@@ -1490,8 +1488,20 @@
                 formStatus.classList.add('hidden');
             }, 5000);
         });
+
+        // Remove .animating from logo after entrance finishes so hover split works
+        document.addEventListener('DOMContentLoaded', () => {
+            const logo = document.getElementById('logoWrapper');
+            if (logo) {
+                const lastSpan = logo.querySelector('span:last-child');
+                if (lastSpan) {
+                    lastSpan.addEventListener('animationend', () => {
+                        logo.classList.remove('animating');
+                    }, { once: true });
+                }
+            }
+        });
     </script>
 </body>
 
 </html>
-```
